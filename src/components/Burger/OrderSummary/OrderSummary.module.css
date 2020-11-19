@@ -1,0 +1,17 @@
+.ItemsList {
+  list-style: none;
+}
+.Item {
+  padding: 2px 0;
+}
+.Item span {
+  text-transform: capitalize;
+}
+
+.SummaryTitle {
+  text-align: center;
+}
+
+.SummaryFooter {
+  text-align: center;
+}
