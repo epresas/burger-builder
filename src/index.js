@@ -11,7 +11,9 @@ import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
 import thunk from 'redux-thunk';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const isDevEnv = process.env.NODE_ENV === 'development';
+
+const composeEnhancers = isDevEnv ?  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  : null || compose;
 
 const rootReducer = combineReducers({
   burgerBuilderReducer,
