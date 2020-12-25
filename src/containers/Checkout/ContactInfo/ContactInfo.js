@@ -8,6 +8,7 @@ import FormInput from '../../../components/UI/FormInput/FormInput';
 import Spinner from '../../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../../hoc/WithErrorHandler/WithErrorHandler';
 import * as actions from '../../../store/actions/index';
+import * as utilities from '../../../shared/utilities';
 
 
 export class ContactInfo extends Component {
@@ -143,35 +144,6 @@ export class ContactInfo extends Component {
     this.props.onOrderBurger(order, token)
   }
 
-  checkValidity = (value, rules) => {
-    let isValid = true;
-    const pattern = {
-      email: /^[a-zA-Z0-9.]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)+$/,
-    }
-
-    if(!rules) {
-      return true;
-    }
-
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = value.trim().length >= rules.minLength && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.trim().length <= rules.maxLength && isValid;
-    }
-
-    if (rules.pattern) {
-      isValid = pattern[rules.pattern].test(value.trim().toLowerCase()) && isValid;
-    }
-
-    return isValid;
-  }
-
   inputChangedHandler = (event, inputId) => {
     const updatedOrderForm = {
       ...this.state.orderForm,
@@ -185,7 +157,7 @@ export class ContactInfo extends Component {
     // Update values and state
     updatedFormElement.value = event.target.value;
     updatedFormElement.touched = true;
-    updatedFormElement.isValid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+    updatedFormElement.isValid = utilities.checkValidity(updatedFormElement.value, updatedFormElement.validation);
     updatedOrderForm[inputId] = updatedFormElement;
 
     for (const inputIdentifier in updatedOrderForm) {
